@@ -72,7 +72,7 @@ app.get(`/db-test`, async (req, res) => {
 app.get('/admin', async (req, res) => {
   try{
     const [orders] = await pool.query('SELECT * FROM orders ORDER BY timestamp DESC');
-    res.render('admin', [orders]);
+    res.render('admin', {orders});
   }catch (err){
     console.error('Database error:', err);
     res.status(500).send('Database error: ' + err.message);
