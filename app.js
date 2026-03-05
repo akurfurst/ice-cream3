@@ -3,7 +3,7 @@ import express from "express";
 import mysql2 from 'mysql2';
 import dotenv from 'dotenv';
 
-
+dotenv.config();
 // Create an instance of an Express application
 const app = express();
 
@@ -15,6 +15,16 @@ const PORT = 3011;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }))
 const orders = [];
+
+//create the pool
+const pool = mysql2.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    databse: process.env.DB_NAME,
+    port: process.env.DB_PORT,
+
+}).promise();
 
 
 
@@ -45,6 +55,18 @@ app.get('/admin', (req, res) => {
 app.get('/confirmation', (req, res) => {
   res.render('confirmation');
 })
+
+//databse test route
+app.get(`/db-test`, async (req, res) => {
+
+  try {
+    const orders = await pool.query('SELECT * FROM orders');
+    res.send(orders[0]);
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).send('Database error: ' + err.message);
+  }
+});
 
 // Start the server and listen on the specified port
 app.listen(PORT, () => {
