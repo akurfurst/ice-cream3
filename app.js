@@ -21,7 +21,7 @@ const pool = mysql2.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    databse: process.env.DB_NAME,
+    database: process.env.DB_NAME,
     port: process.env.DB_PORT,
 
 }).promise();
@@ -48,9 +48,9 @@ app.post('/submit-order', (req, res) => {
   res.render('confirmation', { order })
 })
 
-app.get('/admin', (req, res) => {
-  res.render('admin', { orders });
-});
+// app.get('/admin', (req, res) => {
+//   res.render('admin', { orders });
+// });
 
 app.get('/confirmation', (req, res) => {
   res.render('confirmation');
@@ -63,6 +63,17 @@ app.get(`/db-test`, async (req, res) => {
     const orders = await pool.query('SELECT * FROM orders');
     res.send(orders[0]);
   } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).send('Database error: ' + err.message);
+  }
+});
+
+//display all orders
+app.get('/admin', async (req, res) => {
+  try{
+    const [orders] = await pool.query('SELECT * FROM orders ORDER BY timestamp DESC');
+    res.render('admin', [orders]);
+  }catch (err){
     console.error('Database error:', err);
     res.status(500).send('Database error: ' + err.message);
   }
