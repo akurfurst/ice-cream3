@@ -1,46 +1,47 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initialpscale=1.0" />
-    <link rel="icon" href="images/IceCream.jpg" />
-    <title>Ice Cream</title>
-    <link rel="stylesheet" href="styles/styles.css" />
-    <script src="js/ice-cream.js" defer></script>
-   
-  </head>
-  <body>
-    <main>
-      <h1>Ice Cream Order Form</h1>
 
-      <form id="ice-cream-form" action="/submit-order" method="post">
-        <fieldset>
-          <legend>Personal Information</legend>
-          <!-- Name -->
-          <label for="name"
-            >Name:<span class="err" id="err-name">
-              Name is required
-            </span></label>
-          <br />
-          <input type="text" id="name" name="name" />
-          <br />
-          <!-- Email -->
-          <label for="email">Email:
-            <span class="err" id="err-email">
-                Email is required
-              </span>
-          </label>
-          <br />
-          <input type="text" id="email" name="email" />
-        </fieldset>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initialpscale=1.0" />
+  <link rel="icon" href="images/IceCream.jpg" />
+  <title>Ice Cream</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+  <script src="js/ice-cream.js" defer></script>
 
-        <fieldset>
-          <legend>Order Details</legend>
-          <!-- Flavor -->
-          <label for="flavor">Choose your flavor:
-            <label for="flavor">Name:<span class="err" id="err-flav">
-                Flavor is required
-              </span>
+</head>
+
+<body>
+  <main>
+    <h1>Ice Cream Order Form</h1>
+
+    <form id="ice-cream-form" action="/submit-order" method="post">
+      <fieldset>
+        <legend>Personal Information</legend>
+        <!-- Name -->
+        <label for="customer">Name:<span class="err" id="err-name">
+            Name is required
+          </span></label>
+        <br />
+        <input type="text" id="customer" name="customer" />
+        <br />
+        <!-- Email -->
+        <label for="email">Email:
+          <span class="err" id="err-email">
+            Email is required
+          </span>
+        </label>
+        <br />
+        <input type="text" id="email" name="email" />
+      </fieldset>
+
+      <fieldset>
+        <legend>Order Details</legend>
+        <!-- Flavor -->
+        <label for="flavor">Choose your flavor:
+          <label for="flavor">Name:<span class="err" id="err-flav">
+              Flavor is required
+            </span>
           </label>
           <br />
           <select id="flavor" name="flavor">
@@ -72,36 +73,16 @@
           <!-- Toppings -->
           <p>Toppings:</p>
           <label for="sprinkles">
-            <input
-              type="checkbox"
-              id="sprinkles"
-              name="toppings[]"
-              value="sprinkles"
-            />Sprinkles
+            <input type="checkbox" id="sprinkles" name="toppings[]" value="sprinkles" />Sprinkles
           </label>
           <label for="nuts">
-            <input
-              type="checkbox"
-              id="nuts"
-              name="toppings[]"
-              value="nuts"
-            />Nuts
+            <input type="checkbox" id="nuts" name="toppings[]" value="nuts" />Nuts
           </label>
           <label for="cherry">
-            <input
-              type="checkbox"
-              id="cherry"
-              name="toppings[]"
-              value="cherry"
-            />Cherry
+            <input type="checkbox" id="cherry" name="toppings[]" value="cherry" />Cherry
           </label>
           <label for="whipped-cream">
-            <input
-              type="checkbox"
-              id="whipped-cream"
-              name="toppings[]"
-              value="whipped-cream"
-            />Whipped Cream
+            <input type="checkbox" id="whipped-cream" name="toppings[]" value="whipped-cream" />Whipped Cream
           </label>
           <br />
 
@@ -110,12 +91,13 @@
           <label for="comment">Additional comments:</label>
           <br />
           <textarea rows="5" id="comment" name="comment"></textarea>
-        </fieldset>
+      </fieldset>
 
-        <!-- Submit button -->
-        <button type="submit" id="order-button">Submit Order</button>
-      </form>
-    </main>
-    
-  </body>
+      <!-- Submit button -->
+      <button type="submit" id="order-button">Submit Order</button>
+    </form>
+  </main>
+
+</body>
+
 </html>

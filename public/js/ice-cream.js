@@ -1,7 +1,7 @@
 document.getElementById("ice-cream-form").onsubmit = () => {
 
     let isValid = true;
-    let name = document.getElementById("name").value.trim();
+    let name = document.getElementById("customer").value.trim();
     let email = document.getElementById("email").value.trim();
     let flavor = document.getElementById("flavor");
     let waffle = document.getElementById('waffle');

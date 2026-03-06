@@ -33,20 +33,32 @@ app.get("/", (req, res) => {
   res.render('home');
 });
 
-app.post('/submit-order', (req, res) => {
-  const order = {
-    name: req.body.name,
-    email: req.body.email,
-    cone: req.body.cone,
-    flavor: req.body.flavor,
-    toppings: req.body.toppings,
-    comment: req.body.comment,
-    timestamp: new Date()
-  }
+app.post('/submit-order', async(req, res) => {
+  try{
+    const order = req.body;
 
-  orders.push(order);
-  res.render('confirmation', { order })
-})
+    console.log('New order submitted: ', order);
+
+    //order.toppings = Array.isArray(order.toppings) ? order.toppings.join(", ") : "";
+
+    const sql = `INSERT INTO orders(customer, email, flavor, cone, toppings) VALUES (?, ?, ?, ?, ?);`;
+    const params = [
+      order.customer,
+      order.email,
+      order.flavor,
+      order.cone,
+      Array.isArray(req.body.toppings) ? req.body.toppings.join(", ") : "none"
+    ];
+
+    const result = await pool.execute(sql, params);
+    console.log('Order saved with ID: ', result[0].insertId);
+
+    res.render('confirmation', { order });
+  }catch(err){
+    console.error('Error saving order: ', err);
+    res.status(500).send('Sorry, there was an error processing your order. Please try again.');
+  }
+});
 
 // app.get('/admin', (req, res) => {
 //   res.render('admin', { orders });
